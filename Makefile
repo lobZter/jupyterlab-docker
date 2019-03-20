@@ -9,4 +9,4 @@ pull:
 rmi:
 	docker rmi lobzter/jupyterlab-docker:latest
 run: 
-	docker run -it --rm -p 8888:8888 -v ~/workspace:/workspace -w /workspace lobzter/jupyterlab-docker:latest
+	docker run --runtime=nvidia -it --rm -p 8888:8888 -v ~/workspace:/workspace -w /workspace lobzter/jupyterlab-docker:latest
