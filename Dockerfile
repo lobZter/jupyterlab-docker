@@ -12,12 +12,15 @@ RUN wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -
 # Install jupyterlab
 RUN python3 -m pip install --upgrade pip
 RUN python3 -m pip install jupyterlab
+RUN cd /root
+RUN mkdir .jupyter
+COPY jupyter_notebook_config.py /root/.jupyter/jupyter_notebook_config.py
 
 # Install Python Packages & Requirements (Done near end to avoid invalidating cache)
 RUN cd /
 COPY requirements.txt requirements.txt
 RUN python3 -m pip install -r requirements.txt
-
+RUN rm requirements.txt
 
 EXPOSE 8888
 RUN mkdir workspace
