@@ -16,11 +16,19 @@ RUN cd /root
 RUN mkdir .jupyter
 COPY jupyter_notebook_config.py /root/.jupyter/jupyter_notebook_config.py
 
+# install nodejs
+RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
+RUN apt-get install -y nodejs
+RUN nodejs -v
+
 # Install Python Packages & Requirements (Done near end to avoid invalidating cache)
 RUN cd /
 COPY requirements.txt requirements.txt
 RUN python3 -m pip install -r requirements.txt
 RUN rm requirements.txt
+RUN jupyter nbextension enable --py widgetsnbextension
+RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager
+
 
 EXPOSE 8888
 RUN mkdir workspace
