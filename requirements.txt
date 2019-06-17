@@ -8,6 +8,5 @@ scikit-learn
 scikit-image
 shapely
 joblib
-ipywidgets
 tqdm
 
